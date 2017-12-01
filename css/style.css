@@ -1,0 +1,86 @@
+@charset "utf-8";
+/* CSS Document */
+ 
+#content-container {
+	clear: both;
+	width: 1024px;
+	position: relative;
+	left: 50%;
+	margin-left: -512px;
+	height: 1280px;
+	text-align: center;
+}
+ 
+#header {
+	background-image: url(../images/gold-header1.png);
+	background-repeat: no-repeat;
+	background-position: top;
+	width: 1024px;
+	height: 300px;
+	margin: auto;
+}
+ 
+#logo{
+	float: left;
+	padding-top: 50px;
+	padding-left: 12px;
+	height: 50px;
+	width: 200px;
+}
+ 
+img {
+	border: none;
+}
+
+#nav {
+	height: 78px;
+	width: 1024px;
+	padding-top: 250px;
+	padding-left: 55px;
+
+}
+ 
+#nav ul
+{
+	text-align: left;
+	margin: auto;
+	width: 1024px;
+}
+ 
+#nav ul li
+{
+	display: inline;
+	padding: 0px;
+	margin: 0px;
+}
+ 
+#nav img {
+	border: none;
+	float: center;
+	align: bottom;
+	vertical-align: center;
+}
+
+div#left-panel {
+	float: left;
+	width: 350px;
+	height: 750px;
+	background-color: white;
+	text-align: center;
+}
+
+div#right-panel {
+	float: right;
+	width: 350px;;
+	height: 750px;
+	background-color: white;
+/*	background-color: red; */
+}
+
+div#center-panel {
+	padding: 0px 100px 5px 100px;
+	margin: 0px;
+	height: 750px;
+	background-color: white;
+/*	background-color: blue; */
+}
