@@ -1,32 +1,59 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="https://www.w3.org/1999/xhtml">
+<!DOCTYPE HTML>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" href="css/style.css" type="text/css">
-<title>https://hostileadmin.com</title>
+  <meta charset="UTF-8" />
+  <title></title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet"> 
+  <link rel="stylesheet" href="styles.css">
 </head>
- 
+<html>
 <body>
-  <div id="content-container">
-    <div id="header">
-
-      <div id="logo">
-        <a href="#"><img src="images/hostileadminlogo.png" /></a>
+  <div class="container">
+    <div class="navbar">
+      <div class="navlinks">
+        <a href="index.html">Home</a>
+        <a href="domains.html">Domains</a>
+        <a href="http://blog.hostileadmin.com">Blog</a>
+        <a href="https://www.flickr.com/pdksh/">flickr</a>
+        <a href="https://www.youtube.com/s10ksh/">YouTube</a>
       </div>
 
-      <div id="nav">
-        <ul>
-          <li><a href="#"><img src="images/homenav.png" alt="home" /></a></li>
-          <li><a href="#"><img src="images/vmphotognav.png" alt="VM Photography" /></a></li>
-          <li><a href="https://www.flickr.com/pdksh/"><img src="images/flickrnav.png" alt="flickr" /></a></li>
-          <li><a href="https://blog.hostileadmin.com/"><img src="images/blognav.png" alt="Hostileadmin Blog" /></a></li>
-          <li><a href="https://www.youtube.com/s10ksh/"><img src="images/youtubenav.png" alt="YouTube" /></a></li>
-        </ul>
-      </div>
+      <div class="site"><a href="index.html">hostileadmin.com</a></div>
 
     </div>
 
-  </div>
+    <div class="content">
+      <div class="datetime">
+        <button type="button"
+          onclick="document.getElementById('demo').innerHTML = Date()">
+          Click here to display date & time</button>
 
+        <p id="demo"></p>
+      </div>
+
+      <div class="nwsstations">
+        <input type="text" id="officein" maxlength=3></input>
+        <button type="submit" name="officesub"
+          onclick="officeoutput()">Enter NWS Office</button> 
+
+        <script>
+          function officeoutput() {
+            var request = new XMLHttpRequest()
+            var x = document.getElementById('officein').value;
+            var url = 'https://api.weather.gov/offices/' + x;
+            document.getElementById('officeout').innerHTML = x + '<br>' + url;
+
+            request.open('GET', url, true)
+            request.onload = function(result) {
+              console.log(result)
+            }
+
+            request.send()
+          }
+        </script>
+
+        <p id="officeout"></p>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

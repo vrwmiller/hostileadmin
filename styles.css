@@ -1,0 +1,46 @@
+/* Master styles */
+body {
+  font-family: Poppins, sans-serif;
+  margin: 0px;
+}
+.container {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+/* Nav styles */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  background-image: url('images/gold-header1.png');
+}
+.navlinks {
+  display: flex;
+  font-size: 0.9em;
+  text-transform: uppercase;
+}
+.navbar > .navlinks > a {
+  margin-right: 20px;
+  border-bottom: 1px solid transparent;
+  color: white;
+  text-decoration: none;
+  transition: color 0.5s;
+}
+.navlinks a:hover {
+  color: black;
+  border-bottom: 1px solid black;
+}
+.site a{
+  color: white;
+  text-decoration: none;
+}
+
+/* Content styles */
+.content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.content > div {
+  align-items: center;
+}
