@@ -6,3 +6,10 @@ node_modules/
 
 # misc
 .env
+
+# temporary files used when creating PRs or drafts
+pr-body.txt
+pr-*.txt
+*.tmp
+*~
+.vscode/
