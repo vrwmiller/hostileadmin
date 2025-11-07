@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Contact — The Millers</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="/">We're The Millers</a>
+      <a class="login disabled" aria-disabled="true" tabindex="-1">Login</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="contact-card">
+      <div class="contact-grid">
+        <div class="contact-blurb">
+          <h1>Contact</h1>
+          <p>We'd love to hear from you. Use the form to send a message — sending is a placeholder for now and will be wired up later.</p>
+          <ul class="contact-meta">
+            <li>Email: <a href="mailto:hello@hostileadmin.com">hello@hostileadmin.com</a></li>
+            <li>Response time: Typically within a few days</li>
+          </ul>
+        </div>
+
+        <form id="contact-form" class="contact-form" action="#" method="post" novalidate>
+          <div class="form-row two-col">
+            <div class="col">
+              <label for="name">Your name</label>
+              <input id="name" name="name" type="text" required placeholder="Your full name">
+            </div>
+
+            <div class="col">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" required placeholder="you@example.com">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label for="subject">Subject</label>
+            <input id="subject" name="subject" type="text" required placeholder="Short subject">
+          </div>
+
+          <div class="form-row">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="6" required placeholder="Write your message here"></textarea>
+          </div>
+
+          <div class="form-row form-actions">
+            <button id="send" class="cta" type="submit">Send message</button>
+            <button type="reset" class="muted" style="margin-left:12px">Reset</button>
+          </div>
+
+          <div id="form-status" role="status" aria-live="polite" class="form-status"></div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>© <span id="year"></span> The Millers</div>
+      <div class="footer-links"><a href="/privacy.html">Privacy</a> · <a href="/contact.html">Contact</a></div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // simple client-side handling — no backend integration yet
+    document.getElementById('contact-form').addEventListener('submit', function(evt){
+      evt.preventDefault();
+      var status = document.getElementById('form-status');
+      // basic validation
+      var name = document.getElementById('name').value.trim();
+      var email = document.getElementById('email').value.trim();
+      var subject = document.getElementById('subject').value.trim();
+      var message = document.getElementById('message').value.trim();
+      if(!name || !email || !subject || !message){
+        status.textContent = 'Please fill in all fields before sending.';
+        return;
+      }
+      // show placeholder message — backend integration pending
+      status.textContent = 'Thanks — your message was captured locally. Sending is not yet implemented.';
+      // optionally, clear the form
+      // this.reset();
+    });
+  </script>
+</body>
+</html>
