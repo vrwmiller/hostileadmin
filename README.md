@@ -6,6 +6,17 @@ Files:
 - `public/index.html` — example page
 - `public/style.css` — simple styles
 
+To use the family photo on the homepage:
+
+- Place your photo file named `family.jpg` in the `public/` directory. The homepage references `/family.jpg` as the hero and gallery image.
+
+Example:
+
+```bash
+# copy your image into the project
+cp ~/Downloads/family.jpg /path/to/hostiladmin-cf/public/family.jpg
+```
+
 Quick steps
 
 1) Initialize a local Git repo and push to GitHub (replace <your-repo> with the real name):

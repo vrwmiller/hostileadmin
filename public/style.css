@@ -1,3 +1,99 @@
-body { font-family: system-ui, -apple-system, Roboto, 'Helvetica Neue', Arial; background:#f8fafc; color:#0f172a; margin:40px; }
-main { max-width:780px; margin:auto; padding:24px; background:white; border-radius:8px; box-shadow:0 6px 18px rgba(2,6,23,0.06);} 
-h1 { color:#0b4a6f; }
+:root{
+	--bg: #ffffff;
+	--text: #0f172a; /* near-black for body text */
+	--muted: #6b7280; /* gray-500 */
+	--accent: #0b4a6f; /* teal-blue accent */
+	--card: #f8fafc; /* very light surface */
+	--border: #e6eef6;
+}
+
+*{box-sizing:border-box}
+body{font-family:Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; background:var(--bg); color:var(--text); margin:0}
+.container{max-width:1100px;margin:0 auto;padding:24px}
+.site-header{background:transparent;padding:18px 0}
+.header-inner{display:flex;align-items:center;justify-content:space-between}
+.logo{font-weight:700;color:var(--accent);text-decoration:none;font-size:1.1rem}
+.nav-toggle{display:flex;align-items:center;justify-content:center;background:transparent;border:0;padding:6px;cursor:pointer;-webkit-appearance:none;-moz-appearance:none;appearance:none;margin-left:auto;position:relative;z-index:400}
+.nav-toggle:focus{outline:3px solid rgba(11,74,111,0.12);outline-offset:3px;border-radius:8px}
+.nav a{color:var(--muted);text-decoration:none}
+.nav a:hover{color:var(--text)}
+.nav .btn{background:var(--accent);color:#fff;padding:8px 12px;border-radius:8px;text-decoration:none}
+.nav .btn{min-height:44px;display:inline-flex;align-items:center}
+/* hide inline nav by default so the hamburger is the canonical control */
+.nav{display:none}
+
+/* style for disabled nav items (login coming soon) */
+.nav a.disabled,
+.nav a[aria-disabled="true"]{
+	opacity:0.5;
+	cursor:default;
+	pointer-events:none;
+}
+
+/* header inline login (visible, inert) */
+.header-inner .login{margin-left:auto;text-decoration:none;color:var(--accent);font-weight:600}
+.header-inner .login.disabled, .header-inner .login[aria-disabled="true"]{opacity:0.6;pointer-events:none;cursor:default}
+.hero{padding:44px 0}
+.hero-inner{display:flex;gap:28px;align-items:center}
+.hero-photo-wrap{flex:0 0 320px}
+.hero-photo{width:100%;height:auto;border-radius:12px;display:block;object-fit:cover}
+.hero-copy{flex:1;min-width:220px}
+.hero-copy h1{font-size:2.2rem;margin:0 0 12px;color:var(--text)}
+.hero-copy p{color:var(--muted);line-height:1.6}
+.cta-row{margin-top:18px}
+.cta{background:var(--accent);color:#fff;padding:10px 16px;border-radius:10px;text-decoration:none;margin-right:10px}
+.muted{color:var(--muted);text-decoration:none;padding:10px}
+.hero-art{width:340px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:28px 0}
+.card{background:var(--card);padding:18px;border-radius:10px;border:1px solid var(--border);box-shadow:0 6px 18px rgba(11,74,111,0.04)}
+.card h3{margin:0 0 8px;color:var(--text)}
+.projects{margin:28px 0}
+.family-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.photo-card{background:var(--card);padding:8px;border-radius:8px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center}
+.photo-card img{max-width:100%;border-radius:6px;display:block}
+.project-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.project{background:var(--card);padding:16px;border-radius:8px;border:1px solid var(--border)}
+.blog{margin:28px 0}
+.site-footer{border-top:1px solid var(--border);padding:18px 0;margin-top:36px;background:transparent}
+.footer-inner{display:flex;justify-content:space-between;align-items:center}
+
+@media (max-width:880px){
+	.site-header{position:relative}
+	.hero-inner{flex-direction:column;align-items:flex-start}
+	.hero-art{width:100%;max-width:420px}
+	.hero-copy h1{font-size:1.6rem}
+	.cards{grid-template-columns:1fr}
+	.project-grid{grid-template-columns:1fr}
+	.nav a{margin-left:0;padding:10px 14px}
+	/* When nav is opened (body.nav-open), show a full-screen overlay menu */
+	body.nav-open .nav{display:flex;position:fixed;inset:0;top:64px;background:var(--bg);flex-direction:column;align-items:stretch;padding:24px;z-index:300;box-shadow:0 8px 40px rgba(15,23,42,0.08)}
+	body.nav-open .nav a{font-size:1.125rem;color:var(--text);padding:14px 18px;border-radius:8px}
+	body.nav-open .nav .btn{margin-top:8px}
+	body.nav-open{overflow:hidden}
+	.nav-toggle{display:flex;align-items:center;justify-content:center;background:transparent;border:0;padding:8px;margin-left:12px;-webkit-appearance:none;-moz-appearance:none;appearance:none}
+	.nav-toggle .hamburger{display:inline-block;width:22px;height:2px;background:var(--text);position:relative;border-radius:2px;transition:transform .18s ease, background .18s ease}
+	.nav-toggle .hamburger::before,.nav-toggle .hamburger::after{content:'';position:absolute;left:0;width:22px;height:2px;background:var(--text);border-radius:2px;transition:transform .18s ease, top .18s ease, opacity .18s ease}
+	.nav-toggle .hamburger::before{top:-7px}
+	.nav-toggle .hamburger::after{top:7px}
+	/* transform to X when menu open */
+	body.nav-open .nav-toggle .hamburger{background:transparent}
+	body.nav-open .nav-toggle .hamburger::before{transform:rotate(45deg);top:0}
+	body.nav-open .nav-toggle .hamburger::after{transform:rotate(-45deg);top:0}
+
+
+/* ensure nav is hidden by default and controlled by hamburger */
+	.nav{display:none}
+	.nav-toggle{border-radius:8px}
+	/* make nav links full-width on mobile for easier tapping */
+	.nav a{display:block;padding:12px 10px}
+	/* Make nav links full-width touch targets */
+	.nav a{display:block;padding:12px 10px}
+}
+
+/* accessibility tweaks */
+a:focus{outline:3px solid rgba(11,74,111,0.12);outline-offset:3px}
+
+/* larger touch targets */
+.nav a, .cta, .nav .btn {touch-action:manipulation}
+
+

@@ -3,14 +3,78 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Cloudflare Pages Test Site</title>
+  <title>We're The Millers</title>
+  <meta name="theme-color" content="#ffffff">
+  <meta name="apple-mobile-web-app-capable" content="yes">
   <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-  <main>
-    <h1>Cloudflare Pages — GitHub Integration Test</h1>
-    <p>This is a minimal static site for testing Cloudflare Pages with a GitHub repo.</p>
-    <p>Next steps: create a GitHub repo, push this project, then connect it in the Cloudflare Pages dashboard.</p>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="/">We're The Millers</a>
+
+      <!-- visible, inert Login link (disabled until implemented) -->
+      <a href="#login" class="login disabled" aria-disabled="true" tabindex="-1" title="Login (coming soon)">Login</a>
+
+      <!-- site nav (kept for structure; hidden by default) -->
+      <nav id="site-nav" class="nav" role="navigation" aria-label="Main">
+        <a href="#about">About</a>
+        <a href="#photos">Photos</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="hero-inner">
+      <div class="hero-photo-wrap">
+        <img src="/family.jpg" alt="Family photo" class="hero-photo">
+      </div>
+      <div class="hero-copy">
+        <h1>We're The Millers</h1>
+        <p>Welcome — we share stories from our life together. Simple, private, and family-first.</p>
+      </div>
+    </div>
   </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>© <span id="year"></span> The Millers</div>
+      <div class="footer-links"><a href="#privacy">Privacy</a> · <a href="#contact">Contact</a></div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    // Mobile nav toggle
+    (function(){
+      const btn = document.getElementById('nav-toggle');
+      const nav = document.getElementById('site-nav');
+      if(!btn || !nav) return;
+      btn.addEventListener('click', function(){
+        const open = document.body.classList.toggle('nav-open');
+        // mirror state on nav and button for accessibility
+        nav.classList.toggle('open', open);
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      // close menu when a nav link is clicked
+      document.querySelectorAll('#site-nav a').forEach(function(link){
+        link.addEventListener('click', function(){
+          if(document.body.classList.contains('nav-open')){
+            document.body.classList.remove('nav-open');
+            nav.classList.remove('open');
+            btn.setAttribute('aria-expanded','false');
+          }
+        });
+      });
+      // close nav on resize to desktop (keep menu closed)
+      window.addEventListener('resize', function(){
+        if(window.innerWidth > 880 && document.body.classList.contains('nav-open')){
+          document.body.classList.remove('nav-open');
+          nav.classList.remove('open');
+          btn.setAttribute('aria-expanded','false');
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
