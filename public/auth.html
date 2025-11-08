@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Sign in — The Millers</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="/">We're The Millers</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card contact-card" style="max-width:720px; margin:28px auto;">
+      <h1>Sign in or register</h1>
+      <p class="muted">Choose a sign-in method. If you register with email, your account will be held for approval by the site admin before you can access member-only features.</p>
+
+      <div style="display:flex;gap:12px;margin:16px 0;flex-wrap:wrap">
+        <a class="cta" href="#" id="btn-google">Sign in with Google</a>
+        <a class="cta" href="#" id="btn-facebook">Sign in with Facebook</a>
+      </div>
+
+      <hr style="margin:18px 0">
+
+      <form id="email-signin" style="display:grid;gap:12px;">
+        <label for="email">Email</label>
+        <input id="email" type="email" placeholder="you@example.com" required>
+
+        <label for="password">Password</label>
+        <input id="password" type="password" placeholder="password" required>
+
+        <div style="display:flex;gap:12px;">
+          <button id="btn-signin" class="cta" type="submit">Sign in</button>
+          <button id="btn-register" class="cta" type="button">Register (request access)</button>
+        </div>
+      </form>
+
+      <div id="auth-status" role="status" aria-live="polite" style="margin-top:12px;color:var(--muted)"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>© <span id="year"></span> The Millers</div>
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="/">Home</a>
+        <a href="/contact.html">Contact</a>
+        <a href="/domains.html">Domains</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Placeholder handlers — real auth requires backend/integration
+    document.getElementById('btn-google').addEventListener('click', function(e){
+      e.preventDefault();
+      document.getElementById('auth-status').textContent = 'Redirecting to Google sign-in (placeholder)...';
+    });
+    document.getElementById('btn-facebook').addEventListener('click', function(e){
+      e.preventDefault();
+      document.getElementById('auth-status').textContent = 'Redirecting to Facebook sign-in (placeholder)...';
+    });
+
+    document.getElementById('email-signin').addEventListener('submit', function(evt){
+      evt.preventDefault();
+      document.getElementById('auth-status').textContent = 'Signing in (placeholder) — backend required.';
+    });
+
+    document.getElementById('btn-register').addEventListener('click', function(){
+      document.getElementById('auth-status').textContent = 'Registration requested — admin approval required. (placeholder)';
+    });
+  </script>
+</body>
+</html>
