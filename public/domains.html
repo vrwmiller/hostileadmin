@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Domains — The Millers</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="/">We're The Millers</a>
+      <a class="login disabled" aria-disabled="true" tabindex="-1">Login</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h1>Domains for sale / lease</h1>
+      <p>We occasionally list domains that are available for sale or lease. If you see one you'd like to buy or lease, use the contact form to inquire.</p>
+
+      <ul class="domain-list">
+        <li>
+          <h3>example-park.com</h3>
+          <p class="muted">Sale: $2,500 · Lease: $50/month</p>
+          <p>Short, brandable and memorable. Includes WHOIS transfer support.</p>
+        </li>
+
+        <li>
+          <h3>millersfamilyhome.com</h3>
+          <p class="muted">Sale: $1,200 · Lease: $25/month</p>
+          <p>Perfect for a family-focused site or small portfolio.</p>
+        </li>
+
+        <li>
+          <h3>friendlyops.net</h3>
+          <p class="muted">Sale: $900 · Lease: $20/month</p>
+          <p>Short tech-adjacent name suitable for a small consulting practice.</p>
+        </li>
+      </ul>
+
+      <p class="small muted">To inquire, please <a href="/contact.html">contact us</a> with the domain name and whether you're interested in buying or leasing.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>© <span id="year"></span> The Millers</div>
+      <div class="footer-links"><a href="/contact.html">Contact</a></div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
