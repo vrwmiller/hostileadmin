@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Admin — Approve Users</title>
+    <link rel="stylesheet" href="/style.css">
+    <style>
+      .admin{max-width:900px;margin:36px auto;padding:20px;background:var(--bg);border-radius:8px}
+      .user-row{display:flex;align-items:center;justify-content:space-between;padding:10px;border-bottom:1px solid #eee}
+      .user-left{display:flex;gap:12px;align-items:center}
+      button.approve{background:#0b8b3a;color:#fff;border:none;padding:8px 12px;border-radius:6px;cursor:pointer}
+      button.approve[disabled]{opacity:.5;cursor:not-allowed}
+      .muted{color:var(--muted)}
+    </style>
+  </head>
+  <body>
+    <main class="container admin">
+      <h1>Pending users</h1>
+      <p class="muted">This page lists profiles where <code>approved</code> is not true. You must set your Supabase Project URL and ANON key below, and configure the admin endpoint URL (Cloudflare Worker) and ADMIN secret.</p>
+
+      <div style="margin:12px 0">
+        <label>Supabase URL: <input id="supabase-url" placeholder="https://your-project-ref.supabase.co" style="width:60%" /></label>
+        <label style="margin-left:8px">ANON KEY: <input id="supabase-anon" placeholder="public-anon-key" style="width:30%" /></label>
+      </div>
+
+      <div style="margin:12px 0">
+        <label>Admin endpoint (approve): <input id="approve-endpoint" placeholder="https://<your-deployment>/api/approve" style="width:70%" /></label>
+        <label style="margin-left:8px">Admin Secret: <input id="admin-secret" placeholder="ADMIN_SECRET" style="width:20%" /></label>
+      </div>
+
+      <div id="list"></div>
+    </main>
+
+    <script type="module">
+      // This admin UI is a lightweight convenience for development.
+      // Replace the inputs with your real values or set them at runtime.
+
+      import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+
+      const urlInput = document.getElementById('supabase-url')
+      const anonInput = document.getElementById('supabase-anon')
+      const endpointInput = document.getElementById('approve-endpoint')
+      const secretInput = document.getElementById('admin-secret')
+      const list = document.getElementById('list')
+
+      async function load() {
+        list.innerHTML = 'Loading...'
+        const SUPABASE_URL = urlInput.value.trim()
+        const SUPABASE_ANON = anonInput.value.trim()
+        if(!SUPABASE_URL || !SUPABASE_ANON){ list.innerHTML = '<div class="muted">Please enter Supabase URL + ANON key above to load pending users.</div>'; return }
+
+        const supabase = createClient(SUPABASE_URL, SUPABASE_ANON)
+        const { data, error } = await supabase.from('profiles').select('id,email,approved,created_at').neq('approved', true).order('created_at', { ascending: false })
+        if(error){ list.innerHTML = '<div class="muted">Error loading: '+error.message+'</div>'; return }
+        if(!data || data.length === 0){ list.innerHTML = '<div class="muted">No pending users.</div>'; return }
+
+        list.innerHTML = ''
+        for(const u of data){
+          const row = document.createElement('div'); row.className = 'user-row'
+          row.innerHTML = `<div class="user-left"><div><strong>${u.email||'(no-email)'}</strong><div class="muted">id: ${u.id}</div></div></div>`
+          const btn = document.createElement('button'); btn.className='approve'; btn.textContent='Approve'
+          btn.onclick = ()=> approve(u.id, btn)
+          row.appendChild(btn)
+          list.appendChild(row)
+        }
+      }
+
+      async function approve(id, btn){
+        const endpoint = endpointInput.value.trim();
+        const adminSecret = secretInput.value.trim();
+        if(!endpoint || !adminSecret){ alert('Set approve endpoint and admin secret first.'); return }
+        btn.disabled = true; btn.textContent = 'Approving...'
+        try{
+          const res = await fetch(endpoint, {
+            method: 'POST',
+            headers: {
+              'Content-Type':'application/json',
+              'X-ADMIN-SECRET': adminSecret
+            },
+            body: JSON.stringify({ id })
+          })
+          const text = await res.text()
+          if(!res.ok) throw new Error(text || res.status)
+          btn.textContent = 'Approved'
+          setTimeout(load, 700)
+        }catch(err){
+          btn.disabled = false; btn.textContent = 'Approve'
+          alert('Approve failed: '+err.message)
+        }
+      }
+
+      // Load when inputs change
+      urlInput.addEventListener('change', load)
+      anonInput.addEventListener('change', load)
+
+    </script>
+  </body>
+</html>
