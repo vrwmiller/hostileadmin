@@ -13,10 +13,16 @@ create table if not exists public.profiles (
 );
 
 -- function to insert a profile row when a new auth.user is created
+-- Marked SECURITY DEFINER and with exception handling so failures here do not block auth.user creation
 create or replace function public.handle_new_auth_user()
-returns trigger language plpgsql as $$
+returns trigger language plpgsql security definer as $$
 begin
-  insert into public.profiles (id, email) values (new.id, new.email);
+  begin
+    insert into public.profiles (id, email) values (new.id, new.email);
+  exception when others then
+    -- Log and continue; don't let profile insertion break user creation
+    raise notice 'handle_new_auth_user: %', sqlerrm;
+  end;
   return new;
 end;
 $$;
