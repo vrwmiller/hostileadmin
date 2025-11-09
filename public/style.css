@@ -39,7 +39,15 @@ body{font-family:Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Rob
 .hero-photo{width:100%;height:auto;border-radius:12px;display:block;object-fit:cover}
 .hero-copy{flex:1;min-width:220px}
 .hero-copy h1{font-size:2.2rem;margin:0 0 12px;color:var(--text)}
-.hero-copy p{color:var(--muted);line-height:1.6}
+.hero-copy p{color:var(--muted);line-height:1.6; font-size: 1.2rem;} /* Adjusted font size */
+/* Explicitly reduce <p> font size in hero section */
+.hero-copy p {
+  font-size: 1.2rem !important; /* Ensure smaller font size */
+}
+/* Ensure <p> font size under <h1> in hero section */
+.hero-copy h1 + p {
+  font-size: 1.2rem; /* Smaller than <h1> */
+}
 .cta-row{margin-top:18px}
 .cta{background:var(--accent);color:#fff;padding:10px 16px;border-radius:10px;text-decoration:none;margin-right:10px}
 .muted{color:var(--muted);text-decoration:none;padding:10px}
@@ -137,5 +145,78 @@ a:focus{outline:3px solid rgba(11,74,111,0.12);outline-offset:3px}
 
 /* larger touch targets */
 .nav a, .cta, .nav .btn {touch-action:manipulation}
+
+/* Mockup styles for main container text */
+.main-container {
+  font-size: 1.2rem; /* Slightly larger font size */
+  font-weight: 600; /* Semi-bold for emphasis */
+  color: #333; /* Neutral dark color for readability */
+  background: linear-gradient(to right, #f9f9f9, #ffffff); /* Subtle gradient */
+  padding: 20px; /* Add padding for breathing room */
+  border-left: 4px solid #007acc; /* Accent border */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  margin: 20px 0; /* Space above and below */
+  border-radius: 8px; /* Rounded corners */
+}
+
+.main-container a {
+  color: #007acc; /* Accent color for links */
+  text-decoration: none; /* Remove underline */
+  font-weight: 700; /* Bold links */
+}
+
+.main-container a:hover {
+  text-decoration: underline; /* Underline on hover */
+}
+
+/* Adjust <h1> font size for hero and contact sections */
+.hero-copy h1, .contact-blurb h1 {
+  font-size: 1.8rem; /* Slightly smaller font size */
+}
+
+/* Sites section styling */
+.sites-section {
+  margin-top: 2rem;
+}
+
+.sites-section h2 {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  color: var(--text);
+}
+
+.site-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.site-card {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--text);
+  transition: all 0.2s ease;
+}
+
+.site-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(11,74,111,0.1);
+}
+
+.site-card strong {
+  color: var(--accent);
+  font-size: 1.1rem;
+  margin-bottom: 0.25rem;
+}
+
+.site-card span {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
 
 
