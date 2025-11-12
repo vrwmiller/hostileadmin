@@ -31,7 +31,7 @@
           </ul>
         </div>
 
-        <form id="contact-form" class="contact-form" action="#" method="post" novalidate>
+        <form id="contact-form" class="contact-form" action="/api/contact" method="post" novalidate>
           <div class="form-row two-col">
             <div class="col">
               <label for="name">Your name</label>
@@ -93,24 +93,83 @@
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // simple client-side handling — no backend integration yet
-    document.getElementById('contact-form').addEventListener('submit', function(evt){
+    // Enhanced contact form with worker integration
+    document.getElementById('contact-form').addEventListener('submit', async function(evt){
       evt.preventDefault();
-      var status = document.getElementById('form-status');
-      // basic validation
-      var name = document.getElementById('name').value.trim();
-      var email = document.getElementById('email').value.trim();
-      var subject = document.getElementById('subject').value.trim();
-      var message = document.getElementById('message').value.trim();
-      if(!name || !email || !subject || !message){
-        status.textContent = 'Please fill in all fields before sending.';
+      
+      const status = document.getElementById('form-status');
+      const submitBtn = document.getElementById('send');
+      const form = this;
+      
+      // Get form data
+      const formData = new FormData(form);
+      const name = formData.get('name').trim();
+      const email = formData.get('email').trim();
+      const subject = formData.get('subject').trim();
+      const message = formData.get('message').trim();
+      
+      // Basic client-side validation
+      if (!name || !email || !subject || !message) {
+        showStatus('Please fill in all fields before sending.', 'error');
         return;
       }
-      // show placeholder message — backend integration pending
-      status.textContent = 'Thanks — your message was captured locally. Sending is not yet implemented.';
-      // optionally, clear the form
-      // this.reset();
+      
+      if (!isValidEmail(email)) {
+        showStatus('Please enter a valid email address.', 'error');
+        return;
+      }
+      
+      // Show loading state
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending...';
+      showStatus('Sending your message...', 'info');
+      
+      try {
+        // Submit to worker
+        const response = await fetch('/api/contact', {
+          method: 'POST',
+          body: formData
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+          showStatus(result.message || 'Thank you! Your message has been sent successfully.', 'success');
+          form.reset(); // Clear the form
+        } else {
+          showStatus(result.error || 'Failed to send message. Please try again.', 'error');
+        }
+        
+      } catch (error) {
+        console.error('Form submission error:', error);
+        showStatus('Network error. Please check your connection and try again.', 'error');
+      } finally {
+        // Reset button state
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send message';
+      }
     });
+    
+    // Helper function to display status messages
+    function showStatus(message, type) {
+      const status = document.getElementById('form-status');
+      status.textContent = message;
+      status.className = 'form-status ' + type;
+      
+      // Auto-hide success messages after 5 seconds
+      if (type === 'success') {
+        setTimeout(() => {
+          status.textContent = '';
+          status.className = 'form-status';
+        }, 5000);
+      }
+    }
+    
+    // Email validation helper
+    function isValidEmail(email) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailRegex.test(email);
+    }
   </script>
 </body>
 </html>
