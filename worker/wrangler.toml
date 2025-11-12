@@ -15,7 +15,14 @@ name = "hostileadmin-contact-worker"
 name = "hostileadmin-contact-worker-staging"
 
 # Enable observability for logging
-observability = { enabled = true }
+[observability]
+enabled = true
+
+[observability.logs]
+enabled = true
+head_sampling_rate = 1
+invocation_logs = true
+persist = true
 
 # CORS configuration for your domain
 [[env.production.vars]]
