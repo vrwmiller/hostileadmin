@@ -44,6 +44,14 @@ export default {
         });
       }
 
+      // Handle GET requests with a simple response for testing
+      if (request.method === 'GET') {
+        return new Response('Contact Form Worker v1.0.2 - POST to this endpoint to send email', { 
+          status: 200, 
+          headers: { ...corsHeaders, 'Content-Type': 'text/plain' }
+        });
+      }
+
       // Only allow POST requests for form submissions
       if (request.method !== 'POST') {
         return new Response('Method not allowed', { 
