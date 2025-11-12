@@ -38,8 +38,10 @@ jobs:
           workingDirectory: worker
           secrets: |
             SMTP2GO_API_KEY
-            RECIPIENT_EMAIL
+            TO_EMAIL
+            FROM_EMAIL
         env:
           SMTP2GO_API_KEY: ${{ secrets.SMTP2GO_API_KEY }}
-          RECIPIENT_EMAIL: ${{ secrets.RECIPIENT_EMAIL }}
+          TO_EMAIL: ${{ secrets.RECIPIENT_EMAIL }}
+          FROM_EMAIL: ${{ secrets.FROM_EMAIL }}
 

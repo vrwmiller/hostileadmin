@@ -41,7 +41,8 @@ This setup enables automatic deployment of your Cloudflare Worker whenever you p
 | `CLOUDFLARE_API_TOKEN` | Your Cloudflare API token | For deploying workers |
 | `CLOUDFLARE_ACCOUNT_ID` | Your Cloudflare account ID | Required for deployment |
 | `SMTP2GO_API_KEY` | Your SMTP2GO API key | For sending emails |
-| `RECIPIENT_EMAIL` | your@email.com | Where contact form emails go |
+| `RECIPIENT_EMAIL` | your@email.com | Where contact form emails go (maps to TO_EMAIL) |
+| `FROM_EMAIL` | noreply@hostileladmin.com | Verified sender email in SMTP2GO |
 
 ### 4. How It Works
 
