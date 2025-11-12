@@ -27,7 +27,7 @@ hostiladmin-cf/
 └── README.md           # This file
 ```
 
-## 🚀 Quick Start
+## Quick Start
 
 ### 1. Static Website
 The static files in `public/` can be deployed to any static hosting service. For Cloudflare Pages:
@@ -39,35 +39,29 @@ The static files in `public/` can be deployed to any static hosting service. For
 ```
 
 ### 2. Contact Form Worker
-```bash
-cd worker
-npm install
 
-# Set up secrets (see worker/README.md for details)
-wrangler secret put SMTP2GO_API_KEY
-wrangler secret put TO_EMAIL  
-wrangler secret put FROM_EMAIL
+Choose your preferred deployment method:
 
-# Deploy
-npm run deploy
-```
+- **GitHub Actions** (Recommended): Automatic deployment on push
+  - See `.github/GITHUB_ACTIONS_SETUP.md` for complete setup guide
 
-### 3. Configure Route
-In Cloudflare dashboard, add worker route:
-- Route: `yourdomain.com/api/contact`
-- Worker: `hostileadmin-contact-worker`
+- **Cloudflare Dashboard**: No local tools needed  
+  - See `worker/DEPLOY_NO_NPM.md` for browser-only deployment
 
-## ✨ Features
+- **Local CLI**: Traditional npm/wrangler workflow
+  - See `worker/README.md` for detailed instructions
+
+## Features
 
 ### Website
-- 🎨 **Modern Design**: Glassmorphism effects and elegant typography
-- 📱 **Responsive**: Mobile-first design that works on all devices  
-- ⚡ **Performance**: Optimized static files with CDN delivery
-- 🔗 **Navigation**: Clean, intuitive navigation between pages
+- **Modern Design**: Glassmorphism effects and elegant typography
+- **Responsive**: Mobile-first design that works on all devices  
+- **Performance**: Optimized static files with CDN delivery
+- **Navigation**: Clean, intuitive navigation between pages
 
 ### Contact Form
-- 📧 **Email Integration**: SMTP2GO for reliable email delivery
-- 🛡️ **Security**: Input validation, spam protection, rate limiting
+- **Email Integration**: SMTP2GO for reliable email delivery
+- **Security**: Input validation, spam protection, rate limiting
 - ✅ **Validation**: Client and server-side form validation
 - 🎯 **UX**: Real-time feedback and loading states
 

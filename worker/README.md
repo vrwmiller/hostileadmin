@@ -2,35 +2,78 @@
 
 This Cloudflare Worker handles contact form submissions and sends emails via SMTP2GO.
 
-## Setup
+## Deployment Options
 
-### 1. Install Dependencies
-```bash
-cd worker
-npm install
-```
+### Option 1: Local Development (requires npm/wrangler)
 
-### 2. Configure SMTP2GO
-You'll need to set up these secrets in Cloudflare:
+1. **Install dependencies:**
+   ```bash
+   cd worker
+   npm install
+   ```
 
-```bash
-# Set your SMTP2GO API key
-wrangler secret put SMTP2GO_API_KEY
+2. **Configure secrets:**
+   ```bash
+   # Set your SMTP2GO API key
+   npx wrangler secret put SMTP2GO_API_KEY
+   
+   # Set recipient email
+   npx wrangler secret put RECIPIENT_EMAIL
+   ```
 
-# Set the email address to receive contact form submissions
-wrangler secret put TO_EMAIL
+3. **Deploy:**
+   ```bash
+   npm run deploy
+   # or
+   npx wrangler deploy
+   ```
 
-# Set the "from" email address (must be verified in SMTP2GO)
-wrangler secret put FROM_EMAIL
-```
+### Option 2: Cloudflare Dashboard (No local tools needed)
 
-### 3. Deploy Worker
-```bash
-# Deploy to staging
-wrangler deploy --env staging
+1. **Go to Cloudflare Dashboard:**
+   - Navigate to https://dash.cloudflare.com
+   - Select your account → Workers & Pages
 
-# Deploy to production
-wrangler deploy --env production
+2. **Create new Worker:**
+   - Click "Create application" → "Create Worker"
+   - Name it `contact-form-worker`
+
+3. **Copy the code:**
+   - Copy contents of `src/index.js`
+   - Paste into the Cloudflare code editor
+   - Click "Save and Deploy"
+
+4. **Set environment variables:**
+   - Go to Worker → Settings → Variables
+   - Add `SMTP2GO_API_KEY` (encrypted)
+   - Add `RECIPIENT_EMAIL` (encrypted)
+
+### Option 3: GitHub Actions (Automated deployment)
+
+Create `.github/workflows/deploy.yml` in your repo:
+
+```yaml
+name: Deploy Worker
+on:
+  push:
+    branches: [main]
+    paths: ['worker/**']
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          workingDirectory: worker
+          secrets: |
+            SMTP2GO_API_KEY
+            RECIPIENT_EMAIL
+        env:
+          SMTP2GO_API_KEY: ${{ secrets.SMTP2GO_API_KEY }}
+          RECIPIENT_EMAIL: ${{ secrets.RECIPIENT_EMAIL }}
 ```
 
 ### 4. Configure Routes
@@ -54,13 +97,13 @@ Make sure your `FROM_EMAIL` is verified in SMTP2GO:
 
 ## Features
 
-- ✅ Form validation (client and server-side)
-- ✅ Spam protection with basic pattern detection
-- ✅ Rate limiting (IP-based)
-- ✅ CORS support for cross-origin requests
-- ✅ HTML and plain text email formats
-- ✅ Error handling and user feedback
-- ✅ Security headers and input sanitization
+- Form validation (client and server-side)
+- Spam protection with basic pattern detection
+- Rate limiting (IP-based)
+- CORS support for cross-origin requests
+- HTML and plain text email formats
+- Error handling and user feedback
+- Security headers and input sanitization
 
 ## Testing
 

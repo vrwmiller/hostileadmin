@@ -5,27 +5,27 @@
 
 set -e
 
-echo "🚀 Deploying Contact Form Worker"
+echo "Deploying Contact Form Worker"
 
 # Check if wrangler is installed
 if ! command -v wrangler &> /dev/null; then
-    echo "❌ Wrangler CLI not found. Please install it first:"
+    echo "ERROR: Wrangler CLI not found. Please install it first:"
     echo "npm install -g wrangler"
     exit 1
 fi
 
 # Check if we're in the worker directory
 if [ ! -f "wrangler.toml" ]; then
-    echo "❌ Please run this script from the worker directory"
+    echo "ERROR: Please run this script from the worker directory"
     exit 1
 fi
 
 # Install dependencies
-echo "📦 Installing dependencies..."
+echo "Installing dependencies..."
 npm install
 
 # Check for required secrets
-echo "🔑 Checking for required secrets..."
+echo "Checking for required secrets..."
 echo "Make sure you have set these secrets:"
 echo "- SMTP2GO_API_KEY (your SMTP2GO API key)"
 echo "- TO_EMAIL (email address to receive submissions)"
@@ -43,7 +43,7 @@ if [[ ! $REPLYMATCHES ^[Yy]$ ]]; then
 fi
 
 # Ask for deployment environment
-echo "🌍 Select deployment environment:"
+echo "Select deployment environment:"
 echo "1) Staging"
 echo "2) Production"
 read -p "Enter choice (1-2): " choice
@@ -64,12 +64,12 @@ case $choice in
 esac
 
 echo ""
-echo "✅ Deployment complete!"
+echo "Deployment complete!"
 echo ""
-echo "📋 Next steps:"
+echo "Next steps:"
 echo "1. Configure worker route in Cloudflare dashboard:"
 echo "   Route: yourdomain.com/api/contact"
-echo "   Worker: hostileadmin-contact-worker"
+echo "   Worker: hostileladmin-contact-worker"
 echo ""
 echo "2. Test the contact form on your website"
 echo ""
