@@ -24,13 +24,11 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18'
-          cache: 'npm'
-          cache-dependency-path: worker/package.json
 
       - name: Install dependencies
         run: |
           cd worker
-          npm ci
+          npm install
 
       - name: Deploy to Cloudflare Workers
         uses: cloudflare/wrangler-action@v3
