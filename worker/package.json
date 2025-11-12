@@ -1,6 +1,6 @@
 {
-  "name": "hostileadmin-contact-worker",
-  "version": "1.0.1",
+  "name": "hostileladmin-contact-worker",
+  "version": "1.0.2",
   "description": "Cloudflare Worker for processing contact form submissions via SMTP2GO",
   "main": "src/index.js",
   "scripts": {
