@@ -1,6 +1,7 @@
 /**
- * Cloudflare Worker for processing contact form submissions
- * Integrates with SMTP2GO for reliable email delivery
+// Contact Form Worker for SMTP2GO integration
+// Handles form submissions and sends emails
+// Test deployment via GitHub Actions
  */
 
 // CORS headers for cross-origin requests
