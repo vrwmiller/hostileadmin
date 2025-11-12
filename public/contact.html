@@ -125,8 +125,8 @@
       showStatus('Sending your message...', 'info');
       
       try {
-        // Submit to worker
-        const response = await fetch('/api/contact', {
+        // Submit to worker (temporary direct URL for testing)
+        const response = await fetch('https://hostileladmin-contact-worker.vrwmiller.workers.dev', {
           method: 'POST',
           body: formData
         });
