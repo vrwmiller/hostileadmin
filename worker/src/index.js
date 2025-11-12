@@ -22,6 +22,15 @@ export default {
     try {
       const url = new URL(request.url);
       
+      // Debug: Log request details
+      console.log('Request method:', request.method);
+      console.log('Request path:', url.pathname);
+      console.log('Environment variables available:', {
+        hasApiKey: !!env.SMTP2GO_API_KEY,
+        hasToEmail: !!env.TO_EMAIL,
+        hasFromEmail: !!env.FROM_EMAIL
+      });
+      
       // Handle CORS preflight requests
       if (request.method === 'OPTIONS') {
         return new Response(null, { headers: corsHeaders });
