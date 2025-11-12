@@ -14,9 +14,12 @@ name = "hostileadmin-contact-worker"
 [env.staging]
 name = "hostileadmin-contact-worker-staging"
 
+# Enable observability for logging
+observability = { enabled = true }
+
 # CORS configuration for your domain
 [[env.production.vars]]
-ALLOWED_ORIGINS = "https://hostileadmin.com,https://www.hostileadmin.com"
+ALLOWED_ORIGINS = "https://hostileladmin.com,https://www.hostileladmin.com"
 
 [[env.staging.vars]]
-ALLOWED_ORIGINS = "*"
+ALLOWED_ORIGINS = "https://staging.hostileladmin.com"
