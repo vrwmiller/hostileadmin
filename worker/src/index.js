@@ -20,9 +20,19 @@ const RATE_LIMIT = {
 export default {
   async fetch(request, env, ctx) {
     try {
+      const url = new URL(request.url);
+      
       // Handle CORS preflight requests
       if (request.method === 'OPTIONS') {
         return new Response(null, { headers: corsHeaders });
+      }
+
+      // Check if this is the contact form endpoint
+      if (url.pathname !== '/api/contact' && url.pathname !== '/') {
+        return new Response('Not Found', { 
+          status: 404, 
+          headers: corsHeaders 
+        });
       }
 
       // Only allow POST requests for form submissions
