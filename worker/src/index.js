@@ -5,11 +5,22 @@
  */
 
 // CORS headers for cross-origin requests
-const corsHeaders = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-  'Access-Control-Allow-Headers': 'Content-Type',
-};
+function getCorsHeaders(env, request) {
+  const allowedOrigins = env.ALLOWED_ORIGINS ? 
+    env.ALLOWED_ORIGINS.split(',').map(origin => origin.trim()) : 
+    ['*'];
+  
+  const origin = request.headers.get('Origin');
+  const allowOrigin = allowedOrigins.includes('*') || 
+    (origin && allowedOrigins.includes(origin)) ? 
+    (origin || '*') : 'null';
+
+  return {
+    'Access-Control-Allow-Origin': allowOrigin,
+    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type',
+  };
+}
 
 // Rate limiting configuration
 const RATE_LIMIT = {
@@ -21,14 +32,17 @@ export default {
   async fetch(request, env, ctx) {
     try {
       const url = new URL(request.url);
+      const corsHeaders = getCorsHeaders(env, request);
       
       // Debug: Log request details
       console.log('Request method:', request.method);
       console.log('Request path:', url.pathname);
+      console.log('Request origin:', request.headers.get('Origin'));
       console.log('Environment variables available:', {
         hasApiKey: !!env.SMTP2GO_API_KEY,
         hasToEmail: !!env.TO_EMAIL,
-        hasFromEmail: !!env.FROM_EMAIL
+        hasFromEmail: !!env.FROM_EMAIL,
+        allowedOrigins: env.ALLOWED_ORIGINS
       });
       
       // Handle CORS preflight requests
@@ -37,8 +51,10 @@ export default {
       }
 
       // Check if this is the contact form endpoint
-      if (url.pathname !== '/api/contact' && url.pathname !== '/') {
-        return new Response('Not Found', { 
+      // Accept /api/contact, / (root), and /api/contact/ (with trailing slash)
+      const validPaths = ['/api/contact', '/', '/api/contact/'];
+      if (!validPaths.includes(url.pathname)) {
+        return new Response(`Not Found - Path: ${url.pathname}`, { 
           status: 404, 
           headers: corsHeaders 
         });
