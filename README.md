@@ -1,6 +1,6 @@
 # hostileadmin website
 
-A modern, elegant family website built with static HTML/CSS and powered by Cloudflare Workers for dynamic functionality.
+A modern, elegant website built with static HTML/CSS and powered by Cloudflare Workers for dynamic functionality.
 
 ## Architecture
 
