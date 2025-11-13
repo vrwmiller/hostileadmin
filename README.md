@@ -85,7 +85,7 @@ npm run dev
 3. Test locally before deploying
 4. Deploy via Cloudflare dashboard or CLI
 
-## 📧 Email Configuration
+## Email Configuration
 
 The contact form uses SMTP2GO for email delivery. You'll need:
 
@@ -96,7 +96,7 @@ The contact form uses SMTP2GO for email delivery. You'll need:
 
 See `worker/README.md` for detailed setup instructions.
 
-## 🔐 Security
+## Security
 
 - Input validation and sanitization
 - Basic spam detection patterns
@@ -104,13 +104,13 @@ See `worker/README.md` for detailed setup instructions.
 - CORS properly configured
 - Secrets stored securely in Cloudflare
 
-## 📊 Monitoring
+## Monitoring
 
 - **Website**: Cloudflare Analytics for traffic and performance
 - **Worker**: Cloudflare dashboard for logs and metrics
 - **Email**: SMTP2GO dashboard for delivery statistics
 
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository
 2. Create a feature branch
@@ -118,6 +118,6 @@ See `worker/README.md` for detailed setup instructions.
 4. Test thoroughly
 5. Submit a pull request
 
-## 📄 License
+## License
 
 MIT License - see LICENSE file for details
