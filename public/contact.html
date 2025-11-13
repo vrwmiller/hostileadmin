@@ -132,8 +132,8 @@
         console.log('Attempting form submission...');
         
         try {
-          console.log('Sending to worker via .workers.dev URL...');
-          response = await fetch('https://hostileladmin-contact-worker.vrwmiller.workers.dev/', {
+          console.log('Sending to worker via custom route...');
+          response = await fetch('https://hostileladmin.com/api/contact', {
             method: 'POST',
             body: formData,
             mode: 'cors'
