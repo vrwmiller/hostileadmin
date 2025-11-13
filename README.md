@@ -1,4 +1,4 @@
-# HostileAdmin - Family Website
+# hostileadmin - Family Website
 
 A modern, elegant family website built with static HTML/CSS and powered by Cloudflare Workers for dynamic functionality.
 
