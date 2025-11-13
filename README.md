@@ -27,18 +27,7 @@ hostiladmin-cf/
 └── README.md           # This file
 ```
 
-## Quick Start
-
-### 1. Static Website
-The static files in `public/` can be deployed to any static hosting service. For Cloudflare Pages:
-
-```bash
-# Deploy to Cloudflare Pages
-# Connect your GitHub repo in the Cloudflare dashboard
-# Set build directory to: public/
-```
-
-### 2. Contact Form Worker
+## Contact Form Worker
 
 Choose your preferred deployment method:
 
@@ -96,28 +85,6 @@ The contact form uses SMTP2GO for email delivery. You'll need:
 
 See `worker/README.md` for detailed setup instructions.
 
-## Security
-
-- Input validation and sanitization
-- Basic spam detection patterns
-- Rate limiting to prevent abuse  
-- CORS properly configured
-- Secrets stored securely in Cloudflare
-
-## Monitoring
-
-- **Website**: Cloudflare Analytics for traffic and performance
-- **Worker**: Cloudflare dashboard for logs and metrics
-- **Email**: SMTP2GO dashboard for delivery statistics
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test thoroughly
-5. Submit a pull request
-
 ## License
 
-MIT License - see LICENSE file for details
+Apache License 2.0
