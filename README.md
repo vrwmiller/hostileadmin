@@ -1,15 +1,15 @@
-# hostileadmin - Family Website
+# hostileadmin website
 
 A modern, elegant family website built with static HTML/CSS and powered by Cloudflare Workers for dynamic functionality.
 
-## 🏗️ Architecture
+## Architecture
 
 - **Frontend**: Static HTML/CSS with modern glassmorphism design
 - **Backend**: Cloudflare Worker for contact form processing
 - **Email**: SMTP2GO integration for reliable email delivery
 - **Hosting**: Cloudflare Pages for global CDN and performance
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 hostiladmin-cf/
@@ -62,10 +62,10 @@ Choose your preferred deployment method:
 ### Contact Form
 - **Email Integration**: SMTP2GO for reliable email delivery
 - **Security**: Input validation, spam protection, rate limiting
-- ✅ **Validation**: Client and server-side form validation
-- 🎯 **UX**: Real-time feedback and loading states
+- **Validation**: Client and server-side form validation
+- **UX**: Real-time feedback and loading states
 
-## 🛠️ Development
+## Development
 
 ### Local Development
 ```bash
