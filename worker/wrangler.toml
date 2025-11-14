@@ -8,17 +8,35 @@ compatibility_flags = ["nodejs_compat"]
 # TO_EMAIL - Email address to receive contact form submissions
 # FROM_EMAIL - Email address to send from (must be verified in SMTP2GO)
 
-[env.production]
-name = "hostileadmin-contact-worker"
-
-[env.staging]
-name = "hostileadmin-contact-worker-staging"
-
 # Enable observability for logging
 [observability]
 enabled = true
 
 [observability.logs]
+enabled = true
+head_sampling_rate = 1
+invocation_logs = true
+persist = true
+
+[env.production]
+name = "hostileladmin-contact-worker"
+
+[env.production.observability]
+enabled = true
+
+[env.production.observability.logs]
+enabled = true
+head_sampling_rate = 1
+invocation_logs = true
+persist = true
+
+[env.staging]
+name = "hostileladmin-contact-worker-staging"
+
+[env.staging.observability]
+enabled = true
+
+[env.staging.observability.logs]
 enabled = true
 head_sampling_rate = 1
 invocation_logs = true
