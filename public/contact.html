@@ -137,9 +137,7 @@
             method: 'POST',
             body: formData,
             mode: 'cors'
-          });
-          
-          console.log('Response received:', response.status, response.statusText);
+          });          console.log('Response received:', response.status, response.statusText);
           
           if (response.ok) {
             result = await response.json();
